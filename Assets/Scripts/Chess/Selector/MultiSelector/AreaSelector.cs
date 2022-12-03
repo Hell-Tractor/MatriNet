@@ -10,9 +10,10 @@ public class AreaSelector : IMultiSelector {
         }else if (lineStart.y == lineEnd.y) {
             return Mathf.Abs(point.x-lineStart.x);
         }else {
-            float slope = (lineEnd.y - lineStart.y) / (lineEnd.x - lineStart.x);
-            float intercept = lineEnd.y - slope * lineEnd.x;
-            return Mathf.Abs(slope * point.x - point.y) / Mathf.Sqrt(slope * slope +1);
+            float A = (lineEnd.y - lineStart.y);
+            float B = (lineStart.x - lineEnd.x);
+            float C = (lineEnd.x - lineStart.x) * lineStart.y - (lineEnd.y - lineStart.y) * lineEnd.x ;
+            return ((A * point.x + B * point.y + C) * (A * point.x + B * point.y + C) / (A * A + B * B));
         }
         
     } 
@@ -20,11 +21,11 @@ public class AreaSelector : IMultiSelector {
         bool inside = false;
         int pointCount = polygonPoints.Count;
         Vector2 p1, p2;
-        float halfSqrt2 = Mathf.Sqrt(2) / 2;
+        //float halfSqrt2 = Mathf.Sqrt(2) / 2;
         for (int i = 0, j = pointCount - 1; i < pointCount; j = i, i++) {
             p1 = polygonPoints[i];
             p2 = polygonPoints[j];
-            if (_DistofPtoL(p1, p2, checkPoint) < halfSqrt2) {
+            if (_DistofPtoL(p1, p2, checkPoint) < 0.5) {
                 inside = !inside;
             }
             if (checkPoint.y < p2.y) {

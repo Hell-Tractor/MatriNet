@@ -3,16 +3,17 @@ using System.Linq;
 using UnityEngine;
 
 public class LineSelector : IMultiSelector {
-    float halfSqrt2 = Mathf.Sqrt(2) / 2;
+    //float halfSqrt2 = Mathf.Sqrt(2) / 2;
     private float _DistofPtoL(Vector2 lineStart, Vector2 lineEnd, Vector2 point) {
         if (lineStart.x == lineEnd.x) {
             return Mathf.Abs(point.y-lineStart.y);
         }else if (lineStart.y == lineEnd.y) {
             return Mathf.Abs(point.x-lineStart.x);
         }else {
-            float slope = (lineEnd.y - lineStart.y) / (lineEnd.x - lineStart.x);
-            float intercept = lineEnd.y - slope * lineEnd.x;
-            return Mathf.Abs(slope * point.x - point.y) / Mathf.Sqrt(slope * slope +1);
+            float A = (lineEnd.y - lineStart.y);
+            float B = (lineStart.x - lineEnd.x);
+            float C = (lineEnd.x - lineStart.x) * lineStart.y - (lineEnd.y - lineStart.y) * lineEnd.x ;
+            return ((A * point.x + B * point.y + C) * (A * point.x + B * point.y + C) / (A * A + B * B));
         }
         
     }
@@ -31,7 +32,7 @@ public class LineSelector : IMultiSelector {
             for (int axisY = (int) (DownY + 1E-7); axisY <= (int) (UpperY + 1E-7); axisY++) {
                 Vector2 targetPoint=new Vector2(axisX, axisY);
                 for (int i = 0, j = set.chesses.Count(); i <= set.chesses.Count(); j=i, i++) {
-                    if (_DistofPtoL(set.chesses[j].position, set.chesses[i].position, targetPoint) < halfSqrt2) {
+                    if (_DistofPtoL(set.chesses[j].position, set.chesses[i].position, targetPoint) < 0.5) {
                         allpoint.Add(targetPoint);
                     }
                 }  
