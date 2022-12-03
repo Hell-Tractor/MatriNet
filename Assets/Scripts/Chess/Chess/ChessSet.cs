@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 
-public class ChessSet<T> : IRoundable where T : Chess {
-    private List<T> _chesses = new List<T>();
+public class ChessSet : IRoundable {
+    private List<Chess> _chesses = new List<Chess>();
     public IMutiSelector selector { get; private set; }
 
     public void OnRoundBegin(RoundManager round) {}
