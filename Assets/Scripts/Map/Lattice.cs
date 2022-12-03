@@ -23,7 +23,11 @@ public class Lattice : MonoBehaviour {
 
     public void CloseFog() {
         // this.GetComponent<SpriteRenderer>().color = Color.red;
-        this.GetComponent<ParticleSystem>()?.Stop();
+        ParticleSystem particleSystem = this.GetComponent<ParticleSystem>();
+        if (particleSystem) {
+            particleSystem.Stop();
+            particleSystem.playbackSpeed = 5.0f;
+        }
         _hasFog = false;
     }
 
@@ -41,7 +45,7 @@ public class Lattice : MonoBehaviour {
             return;
         }
         this.chess = chess;
-        chess.transform.localPosition = Vector2.zero;
+        // chess.transform.localPosition = Vector2.zero;
 
         // Generate Lattice nearby
         Board.Instance.GenerateLattice(this.transform.position, this.PreGenerateWidth);

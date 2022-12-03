@@ -19,12 +19,12 @@ public class Board : MonoBehaviour {
     }
 
     private void Update() {
-        // if (Input.GetMouseButtonDown(0)) {
-        //     Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        //     Lattice lattice = this.GetLatticeAt(mousePosition);
-        //     if (lattice != null)
-        //         lattice.SetChess(null);
-        // }
+        if (Input.GetMouseButtonDown(0)) {
+            Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Lattice lattice = this.GetLatticeAt(mousePosition);
+            if (lattice != null)
+                lattice.SetChess(null);
+        }
     }
 
     public void GenerateLattice(Vector2 position) {
