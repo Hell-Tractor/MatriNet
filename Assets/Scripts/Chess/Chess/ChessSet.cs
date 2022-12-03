@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 
 public class ChessSet : IRoundable {
-    private List<Chess> _chesses = new List<Chess>();
-    public IMutiSelector selector { get; private set; }
+    public List<Chess> chesses = new List<Chess>();
+    public IMultiSelector selector { get; private set; }
 
     public void OnRoundBegin(RoundManager round) {}
 
