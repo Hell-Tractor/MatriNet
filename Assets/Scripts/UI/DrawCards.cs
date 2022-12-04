@@ -22,6 +22,7 @@ public class DrawCards : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
         if(name == "chip")
         {
             Debug.Log("chip");
+            
             ChessFactory.Instance.GenerateChess(ChessType.Chip).OnPick(Board.Instance);
 
         }
