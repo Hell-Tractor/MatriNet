@@ -800,6 +800,7 @@ GameObject:
   - component: {fileID: 478108581}
   - component: {fileID: 478108582}
   - component: {fileID: 478108583}
+  - component: {fileID: 478108584}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -893,6 +894,27 @@ MonoBehaviour:
   bombCards: {fileID: 2006658706}
   coinNumber: {fileID: 31359105}
   shopWindow: {fileID: 380765622}
+--- !u!114 &478108584
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 478108577}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c95476516cc0b14d8a9ea01ff6dbef2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveAmount: 8
+  m_minCamXPos: -1000
+  m_maxCamXPos: 1000
+  m_minCamYPos: -1000
+  m_maxCamYPos: 1000
+  distance: 20
+  timer: 300
+  myCamera: {fileID: 500211480}
+  m_camFollowPos: {x: 0, y: 0}
 --- !u!1 &500211478
 GameObject:
   m_ObjectHideFlags: 0
@@ -2055,6 +2077,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Result
       objectReference: {fileID: 0}
+    - target: {fileID: 6747440114032516560, guid: c7d8eb1fba8b6af4c954b9e3a558f4b9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6747440114032516561, guid: c7d8eb1fba8b6af4c954b9e3a558f4b9, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -2137,6 +2163,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6747440114032516561, guid: c7d8eb1fba8b6af4c954b9e3a558f4b9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6747440114649494290, guid: c7d8eb1fba8b6af4c954b9e3a558f4b9, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 865.9412
+      objectReference: {fileID: 0}
+    - target: {fileID: 6747440114649494290, guid: c7d8eb1fba8b6af4c954b9e3a558f4b9, type: 3}
+      propertyPath: m_AnchoredPosition.x
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
