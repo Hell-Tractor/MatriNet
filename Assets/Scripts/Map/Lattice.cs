@@ -5,7 +5,7 @@ public class Lattice : MonoBehaviour {
     public Vector2 Size;
     public int PreGenerateWidth = 5;
     private bool _hasFog = true;
-
+    public bool HasFog { get => _hasFog; }
     private static Vector2[] _directions = new Vector2[] {
         Vector2.up,
         Vector2.down,

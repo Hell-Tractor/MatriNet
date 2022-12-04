@@ -33,7 +33,7 @@ public class AreaSelector : IMultiSelector {
     public List<Vector2> Select(ChessSet set) {
         List<Vector2> allpoint = new List<Vector2> {};
         float UpperY = set.chesses[0].position.y, DownY = set.chesses[0].position.y, LeftX = set.chesses[0].position.x, RightX = set.chesses[0].position.x;
-        for (int i = 0; i < set.chesses.Count(); i++) { 
+        for (int i = 0; i < set.chesses.Count; i++) { 
             if (set.chesses[i].position.x < LeftX) { LeftX = set.chesses[i].position.x;}
             if (set.chesses[i].position.x > RightX) { RightX = set.chesses[i].position.x;}
             if (set.chesses[i].position.y > UpperY) { UpperY = set.chesses[i].position.y;}
