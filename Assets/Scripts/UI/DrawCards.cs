@@ -8,7 +8,6 @@ using UnityEngine.UI;
 
 public class DrawCards : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
-
     public float distance = 1f;
     public int count;
     public Text countText;
