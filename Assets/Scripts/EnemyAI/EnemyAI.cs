@@ -30,6 +30,7 @@ public class EnemyAI {
 
         
         if (round == 1) return;
+        if (sets.Count == 0) return;
         List<AbstractChess> enemyChessSet = new List<AbstractChess> {};
         int attackCount = 0;
         int chessCount = 0;

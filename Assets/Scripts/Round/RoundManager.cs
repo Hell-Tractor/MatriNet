@@ -42,6 +42,7 @@ public class RoundManager : MonoBehaviour {
             var tmpchess = ChessFactory.Instance.GenerateChess(chess.type);
             tmpchess.transform.position = chess.position;
         }
+        RazerManager.Instance.RemoveAllRazer();
     }
 
     public void EndCurrentRound() {
@@ -54,7 +55,7 @@ public class RoundManager : MonoBehaviour {
         AreaSelector EndRoundArea = new AreaSelector();
         PlayerInfo.Instance.Money += Board.Instance.chessSets.Select(chessset => EndRoundArea.Select(chessset).Count).Sum();
         Debug.Log(PlayerInfo.Instance.Money);
-        RazerManager.Instance.RemoveAllRazer();
+        
         Board.Instance.chesses = Board.Instance.chesses.Where(chess => !chess.IsEnemy).ToList();
         GameObject.FindGameObjectsWithTag("Enemy").ToList().ForEach(x => Destroy(x));
         Shop?.SetActive(true);
