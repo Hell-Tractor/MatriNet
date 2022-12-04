@@ -34,10 +34,12 @@ public class RoundManager : MonoBehaviour {
     }
 
     public void EndCurrentRound() {
-        _roundables.ForEach(roundable => roundable.OnRoundEnd(this));
+        
         AreaSelector EndRoundArea = new AreaSelector();
         
         PlayerInfo.Instance.Money += EndRoundArea.Select(Board.Instance.GetCurrentChessSet()).Count;
+
+        _roundables.ForEach(roundable => roundable.OnRoundEnd(this));
 
     }
 }
