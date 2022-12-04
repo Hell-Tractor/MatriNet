@@ -29,7 +29,10 @@ public class DrawCards : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     }
     public void OnPointerClick(PointerEventData eventData)
     {
-        
+        if(eventData.button == PointerEventData.InputButton.Right)
+        {
+           return;
+        }
         if (count > 0)
         {
             count--;
