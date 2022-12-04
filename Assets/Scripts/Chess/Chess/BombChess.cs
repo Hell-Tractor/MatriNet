@@ -20,6 +20,10 @@ public class BombChess : Chess {
                     Destroy(rock.gameObject);
                 }
             });
+
+            Lattice lattice = Board.Instance.GetLatticeAt(this.position);
+            lattice.GetChess();
+            Destroy(this.gameObject);
         }
     }
 }

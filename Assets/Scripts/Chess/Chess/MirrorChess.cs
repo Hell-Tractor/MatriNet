@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Linq;
+using System.Collections.Generic;
 
 public class MirrorChess : Chess {
     protected static readonly Vector2[] directions = new Vector2[] {
@@ -41,9 +42,13 @@ public class MirrorChess : Chess {
             else
                 selector = new DownSelector();
 
-            Chess origin = selector.Select(this, Board.Instance.chesses)
-                .Where(chess => chess?.type == ChessType.Chip)
-                .Aggregate((a, b) => Vector2.Distance(a.position, this.position) < Vector2.Distance(b.position, this.position) ? a : b);
+            IEnumerable<Chess> chessList = selector.Select(this, Board.Instance.chesses)
+                            .Where(chess => chess?.type == ChessType.Chip);
+            if (!chessList.Any()) {
+                Debug.LogWarning("No chip chesses found.");
+                return;
+            }
+            Chess origin = chessList.Aggregate((a, b) => Vector2.Distance(a.position, this.position) < Vector2.Distance(b.position, this.position) ? a : b);
 
             Vector2 position = this.position - origin.position + this.position;
             Lattice lattice = Board.Instance.GetLatticeAt(position);
