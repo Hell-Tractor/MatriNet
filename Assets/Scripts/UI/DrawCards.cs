@@ -34,7 +34,7 @@ public class DrawCards : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
         else if(name == "bomb")
         {
             Debug.Log("bomb");
-            ChessFactory.Instance.GenerateChess(ChessType.Rock).OnPick(Board.Instance);
+            ChessFactory.Instance.GenerateChess(ChessType.Bomb).OnPick(Board.Instance);
         }
 
 

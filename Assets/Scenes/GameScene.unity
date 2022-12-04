@@ -577,6 +577,7 @@ GameObject:
   m_Component:
   - component: {fileID: 478108578}
   - component: {fileID: 478108579}
+  - component: {fileID: 478108580}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -592,7 +593,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 478108577}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 86.31585, y: 37.22246, z: -862.30804}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -611,6 +612,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 0}
+--- !u!114 &478108580
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 478108577}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 355e5edaac3255d4b938e6257503b170, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &500211478
 GameObject:
   m_ObjectHideFlags: 0
@@ -1353,8 +1366,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ChipChessPrefab: {fileID: 5785211321744110922, guid: b62d87880ef5bac4aac9ab82e6e674c2, type: 3}
   MirrorChessPrefab: {fileID: 5842162367881578042, guid: 592f69e20cb66d94eb7a48d6ffd16f30, type: 3}
-  RockChessPrefab: {fileID: 0}
-  BombChessPrefab: {fileID: 0}
+  RockChessPrefab: {fileID: 2239817150752515877, guid: 324760ddfe2b32a42ac93c5851bcdca6, type: 3}
+  BombChessPrefab: {fileID: 5109021425585418213, guid: fe74e1bf0ec250c45839326fb1d95300, type: 3}
 --- !u!4 &940560951
 Transform:
   m_ObjectHideFlags: 0

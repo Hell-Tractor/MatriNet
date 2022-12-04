@@ -3,7 +3,7 @@ using System.Linq;
 using UnityEngine;
 
 public class ChipChess : Chess {
-    private bool isInChessSet = false;
+    public bool isInChessSet = false;
 
     public ChipChess() {
         this.type = ChessType.Chip;
