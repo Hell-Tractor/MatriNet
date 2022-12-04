@@ -31,7 +31,7 @@ public class LineSelector : IMultiSelector {
         for (int axisX = (int) (LeftX + 1E-7); axisX <= (int) (RightX + 1E-7); axisX++) {
             for (int axisY = (int) (DownY + 1E-7); axisY <= (int) (UpperY + 1E-7); axisY++) {
                 Vector2 targetPoint=new Vector2(axisX, axisY);
-                for (int i = 0, j = set.chesses.Count(); i <= set.chesses.Count(); j=i, i++) {
+                for (int i = 0, j = set.chesses.Count() - 1; i <= set.chesses.Count(); j=i, i++) {
                     if (_DistofPtoL(set.chesses[j].position, set.chesses[i].position, targetPoint) < 0.5) {
                         allpoint.Add(targetPoint);
                     }
