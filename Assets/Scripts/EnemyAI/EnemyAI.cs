@@ -22,7 +22,7 @@ public class EnemyAI {
     }
     private bool _FindAdjustSet(List<AbstractChess> set, float x, float y) {
         foreach (var item in set) {
-            if ( Mathf.Abs(item.position.x - x) < 1E-5 || Mathf.Abs(item.position.y - y) < 1E-5) return true;
+            if ( Mathf.Abs(item.position.x - x) < 1 + 1E-5 || Mathf.Abs(item.position.y - y) < 1 + 1E-5) return true;
         }
         return false;
     }
@@ -140,6 +140,9 @@ public class EnemyAI {
             
         
             
+        }
+        foreach (var i in enemyChessSet) {
+            Debug.Log(i.position);
         }
         EnemyChessSet.AddRange(enemyChessSet);
     }
