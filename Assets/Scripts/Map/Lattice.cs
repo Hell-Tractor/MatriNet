@@ -35,8 +35,8 @@ public class Lattice : MonoBehaviour {
         return this.chess != null;
     }
 
-    public bool SetChess(Chess chess) {
-        if (this._hasFog) {
+    public bool SetChess(Chess chess, bool ignoreFog = false) {
+        if (this._hasFog && !ignoreFog) {
             Debug.LogWarning("Lattice has fog, can't set chess.");
             return false;
         }

@@ -19,10 +19,10 @@ public abstract class Chess : MonoBehaviour, IRoundable {
     public virtual void OnPlace(Board board) {}
 #endregion
 #region IRoundable
-    public void OnRoundBegin(RoundManager round) {
+    public virtual void OnRoundBegin(RoundManager round) {
         isSettled = false;
     }
-    public void OnRoundEnd(RoundManager round) {
+    public virtual void OnRoundEnd(RoundManager round) {
         isSettled = true;
     }
 #endregion

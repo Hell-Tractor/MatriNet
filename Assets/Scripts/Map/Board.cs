@@ -33,6 +33,8 @@ public class Board : MonoBehaviour {
                     Chess chess = ChessFactory.Instance.GenerateChess(ChessType.Chip);
                     if (!lattice.SetChess(chess))
                         Destroy(chess.gameObject);
+                    else
+                        chesses.Add(chess);
                 }
             }
         }
