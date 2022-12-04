@@ -30,8 +30,9 @@ public class Board : MonoBehaviour {
                 if (lattice.HasChess() && MouseFollower.Instance.item == null) {
                     lattice.chess.OnClick(this, 0);
                 } else if (!lattice.HasChess() && MouseFollower.Instance.item != null) {
-                    if (lattice.SetChess(MouseFollower.Instance.item.GetComponent<Chess>()))
-                        chesses.Add(MouseFollower.Instance.item.GetComponent<Chess>());
+                    Chess chess = MouseFollower.Instance.item.GetComponent<Chess>();
+                    if (lattice.SetChess(chess))
+                        chesses.Add(chess);
                 }
             }
         }
