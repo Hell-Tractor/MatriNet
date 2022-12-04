@@ -39,7 +39,7 @@ public class ChipChess : Chess {
                 vectors.ToList().ForEach(lattice => {
                     SpriteRenderer renderer = lattice?.GetComponent<SpriteRenderer>();
                     if (renderer != null)
-                        renderer.color = Color.blue;
+                        renderer.color = lattice.HighLightColor;
                 });
                 RazerFactory.Instance.GenerateRazer(last.transform.position, this.transform.position);
             }
