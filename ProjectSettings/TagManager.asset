@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Razer
   - Lattice
+  - Enemy
   layers:
   - Default
   - TransparentFX

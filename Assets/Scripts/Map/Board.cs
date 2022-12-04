@@ -1,4 +1,3 @@
-using System.Runtime.InteropServices.ComTypes;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -31,11 +30,6 @@ public class Board : MonoBehaviour {
                 if (lattice.HasChess() && MouseFollower.Instance.item == null) {
                     if (lattice.chess.type == ChessType.Chip) {
                         RazerManager.Instance.RemoveAllRazer();
-                        this.chessSets.Clear();
-                        this.chesses.ForEach(chess => {
-                            if (chess.type == ChessType.Chip)
-                                (chess as ChipChess).isInChessSet = false;
-                        });
                     }
                     lattice.chess.OnClick(this, 0);
                     lattice.chess.OnPick(this);

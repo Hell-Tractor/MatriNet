@@ -6,6 +6,7 @@ public class ChessFactory : MonoBehaviour {
     public GameObject RockChessPrefab;
     public GameObject BombChessPrefab;
 
+    public GameObject EnemyChipChessPrefab;
     public static ChessFactory Instance { get; private set; } = null;
 
     private void Start() {
@@ -31,8 +32,14 @@ public class ChessFactory : MonoBehaviour {
             case ChessType.Bomb:
                 chessPrefab = BombChessPrefab;
                 break;
+            case ChessType.EnemyChip:
+                chessPrefab = EnemyChipChessPrefab;
+                break;
         }
         GameObject chess = Instantiate(chessPrefab);
+        Chess tmp = chess.GetComponent<Chess>();
+        if (type == ChessType.EnemyChip) 
+            tmp.IsEnemy = true;
         return chess.GetComponent<Chess>();
     }
 }
