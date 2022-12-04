@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -30,11 +31,16 @@ public class ChipChess : Chess {
                 tempSet.chesses.Add(last);
                 tempSet.chesses.Add(this);
                 IMultiSelector lineSelector = new LineSelector();
-                if (lineSelector.Select(tempSet).Any(pos => board.GetLatticeAt(pos)?.chess?.type == ChessType.Rock)) {
+                IEnumerable<Lattice> vectors = lineSelector.Select(tempSet).Select(pos => board.GetLatticeAt(pos));
+                if (vectors.Any(lattice => lattice?.chess?.type == ChessType.Rock)) {
                     Debug.LogWarning("Razer blocked.");
                     return;
                 }
-
+                vectors.ToList().ForEach(lattice => {
+                    SpriteRenderer renderer = lattice?.GetComponent<SpriteRenderer>();
+                    if (renderer != null)
+                        renderer.color = Color.blue;
+                });
                 RazerFactory.Instance.GenerateRazer(last.transform.position, this.transform.position);
             }
         }
