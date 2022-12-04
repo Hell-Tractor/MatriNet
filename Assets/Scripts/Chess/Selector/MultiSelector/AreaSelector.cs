@@ -31,7 +31,8 @@ public class AreaSelector : IMultiSelector {
 
 
     public List<Vector2> Select(ChessSet set) {
-        List<Vector2> allpoint = new List<Vector2> {};
+        List<Vector2> allpoint = new List<Vector2> ();
+        if (set.chesses.Count == 0) return allpoint;
         float UpperY = set.chesses[0].position.y, DownY = set.chesses[0].position.y, LeftX = set.chesses[0].position.x, RightX = set.chesses[0].position.x;
         for (int i = 0; i < set.chesses.Count; i++) { 
             if (set.chesses[i].position.x < LeftX) { LeftX = set.chesses[i].position.x;}
@@ -43,7 +44,7 @@ public class AreaSelector : IMultiSelector {
         for (int axisX = (int) (LeftX + 1E-7); axisX <= (int) (RightX + 1E-7); axisX++) {
             for (int axisY = (int) (DownY + 1E-7); axisY <= (int) (UpperY + 1E-7); axisY++) {
                 Vector2 targetPoint=new Vector2(axisX, axisY);
-                if (_IsInPolygon(targetPoint,set.chesses.ConvertAll(chess => chess.position))) {
+                if (_IsInPolygon(targetPoint,set.chesses.Take(set.chesses.Count-1).Select(chess => chess.position).ToList())) {
                     allpoint.Add(targetPoint);
                 }
             }

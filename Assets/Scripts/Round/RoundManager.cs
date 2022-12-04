@@ -18,6 +18,7 @@ public class RoundManager : MonoBehaviour {
             return;
         }
         Instance = this;
+        StartNextRound();
     }
 
     public void StartNextRound() {
@@ -39,13 +40,14 @@ public class RoundManager : MonoBehaviour {
     }
 
     public void EndCurrentRound() {
-        
+        _roundables = Board.Instance.GetRoundables();
         List<IRoundable> mirros = _roundables.Where(r => (r as MirrorChess) != null).ToList();
         List<IRoundable> enemy = _roundables.Where(r => (r as Chess) != null && (r as Chess).IsEnemy).ToList();
         mirros.ForEach(roundable => roundable.OnRoundEnd(this));
         enemy.ForEach(roundable => roundable.OnRoundEnd(this));
         _roundables.ForEach(roundable => roundable.OnRoundEnd(this));
         AreaSelector EndRoundArea = new AreaSelector();
-        PlayerInfo.Instance.Money += EndRoundArea.Select(Board.Instance.GetCurrentChessSet()).Count;
+        PlayerInfo.Instance.Money += Board.Instance.chessSets.Select(chessset => EndRoundArea.Select(chessset).Count).Sum();
+        Debug.Log(PlayerInfo.Instance.Money);
     }
 }

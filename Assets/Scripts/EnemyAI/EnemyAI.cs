@@ -21,6 +21,7 @@ public class EnemyAI {
     }
 
     public void GenerateEasyAttack(int round, List<ChessSet> sets, List<Lattice> fogTiles){
+        if (round == 1) return;
         List<AbstractChess> enemyChessSet = new List<AbstractChess> {};
         int attackCount = 0;
         int chessCount = 0;
