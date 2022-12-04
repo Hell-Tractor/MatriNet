@@ -28,7 +28,9 @@ public class Board : MonoBehaviour {
             Lattice lattice = this.GetLatticeAt(mousePosition);
             if (lattice != null) {
                 if (lattice.HasChess() && MouseFollower.Instance.item == null) {
+                    RazerManager.Instance.RemoveAllRazer();
                     lattice.chess.OnClick(this, 0);
+                    lattice.chess.OnPick(this);
                 } else if (!lattice.HasChess() && MouseFollower.Instance.item != null) {
                     Chess chess = MouseFollower.Instance.item.GetComponent<Chess>();
                     if (lattice.SetChess(chess))
