@@ -20,7 +20,12 @@ public class EnemyAI {
         }
         return false;
     }
-
+    private bool _FindAdjustSet(List<AbstractChess> set, float x, float y) {
+        foreach (var item in set) {
+            if ( Mathf.Abs(item.position.x - x) < 1E-5 || Mathf.Abs(item.position.y - y) < 1E-5) return true;
+        }
+        return false;
+    }
     public void GenerateEasyAttack(int round, List<ChessSet> sets, List<Lattice> fogTiles){
 
         
@@ -65,8 +70,10 @@ public class EnemyAI {
                         diff++;
                         positionX = route[crosspointnum].x - diff;      
                     }
-                    while (!_FindFogTile(fogTiles, route[crosspointnum].x - diff, route[crosspointnum].y + side1width) ||
-                    !_FindFogTile(fogTiles, route[crosspointnum].x - diff, route[crosspointnum].y - side2width));  
+                    while ((!_FindFogTile(fogTiles, route[crosspointnum].x - diff, route[crosspointnum].y + side1width) ||
+                    !_FindFogTile(fogTiles, route[crosspointnum].x - diff, route[crosspointnum].y - side2width)) && 
+                    !_FindAdjustSet(enemyChessSet, route[crosspointnum].x - diff, route[crosspointnum].y + side1width) &&
+                    !_FindAdjustSet(enemyChessSet, route[crosspointnum].x - diff, route[crosspointnum].y - side2width));  
                     enemychess1.type = ChessType.EnemyChip;
                     enemychess1.position = new Vector2(positionX, route[crosspointnum].y + side1width);
                     enemyChessSet.Add(enemychess1);
@@ -81,8 +88,10 @@ public class EnemyAI {
                         diff++;
                         positionX = route[crosspointnum].x + diff;      
                     }
-                    while (!_FindFogTile(fogTiles, route[crosspointnum].x + diff, route[crosspointnum].y + side1width) ||
-                    !_FindFogTile(fogTiles, route[crosspointnum].x + diff, route[crosspointnum].y - side2width)); 
+                    while ((!_FindFogTile(fogTiles, route[crosspointnum].x + diff, route[crosspointnum].y + side1width) ||
+                    !_FindFogTile(fogTiles, route[crosspointnum].x + diff, route[crosspointnum].y - side2width)) &&
+                    !_FindAdjustSet(enemyChessSet, route[crosspointnum].x + diff, route[crosspointnum].y + side1width) &&
+                    !_FindAdjustSet(enemyChessSet, route[crosspointnum].x + diff, route[crosspointnum].y - side2width)); 
 
                     enemychess1.type = ChessType.EnemyChip;
                     enemychess1.position = new Vector2(positionX, route[crosspointnum].y + side1width);
@@ -96,8 +105,10 @@ public class EnemyAI {
                         diff++;
                         positionY = route[crosspointnum].y - diff;      
                     }
-                    while (!_FindFogTile(fogTiles, route[crosspointnum].x + side1width, route[crosspointnum].y - diff) ||
-                    !_FindFogTile(fogTiles, route[crosspointnum].x - side2width, route[crosspointnum].y - diff));
+                    while ((!_FindFogTile(fogTiles, route[crosspointnum].x + side1width, route[crosspointnum].y - diff) ||
+                    !_FindFogTile(fogTiles, route[crosspointnum].x - side2width, route[crosspointnum].y - diff)) &&
+                    !_FindAdjustSet(enemyChessSet, route[crosspointnum].x + side1width, route[crosspointnum].y - diff) &&
+                    !_FindAdjustSet(enemyChessSet, route[crosspointnum].x - side2width, route[crosspointnum].y - diff));
 
                     enemychess1.type = ChessType.EnemyChip;
                     enemychess1.position = new Vector2(route[crosspointnum].x + side1width, positionY);
@@ -111,8 +122,10 @@ public class EnemyAI {
                         diff++;
                         positionY = route[crosspointnum].y + diff;      
                     }
-                    while (!_FindFogTile(fogTiles, route[crosspointnum].x + side1width, route[crosspointnum].y + diff) ||
-                    !_FindFogTile(fogTiles, route[crosspointnum].x - side2width, route[crosspointnum].y + diff));
+                    while ((!_FindFogTile(fogTiles, route[crosspointnum].x + side1width, route[crosspointnum].y + diff) ||
+                    !_FindFogTile(fogTiles, route[crosspointnum].x - side2width, route[crosspointnum].y + diff)) &&
+                    !_FindAdjustSet(enemyChessSet, route[crosspointnum].x + side1width, route[crosspointnum].y + diff) &&
+                    !_FindAdjustSet(enemyChessSet, route[crosspointnum].x - side2width, route[crosspointnum].y + diff));
 
                     enemychess1.type = ChessType.EnemyChip;
                     enemychess1.position = new Vector2(route[crosspointnum].x + side1width, positionY);
