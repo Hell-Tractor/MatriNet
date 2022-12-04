@@ -52,13 +52,6 @@ public class RoundManager : MonoBehaviour {
         RazerManager.Instance.RemoveAllRazer();
         Board.Instance.chesses = Board.Instance.chesses.Where(chess => !chess.IsEnemy).ToList();
         GameObject.FindGameObjectsWithTag("Enemy").ToList().ForEach(x => Destroy(x));
-
-        //
-        Board.Instance.chesses.ForEach(chess => {
-            if (chess?.type == ChessType.Chip)
-                (chess as ChipChess).isInChessSet = false;
-        });
-        //Board.Instance.chessSets.Clear();
         StartNextRound();
     }
 }
