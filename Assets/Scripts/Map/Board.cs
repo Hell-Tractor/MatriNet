@@ -11,13 +11,15 @@ public class Board : MonoBehaviour {
 
     public static Board Instance { get; private set; } = null;
 
-    private void Start() {
+    private void Awake() {
         if (Instance != null) {
             Debug.LogError("Board already exists.");
             return;
         }
         Instance = this;
+    }
 
+    private void Start() {
         this.GenerateLattice(Vector2.zero, this.InitSize, this.NonFogSize);
     }
 
