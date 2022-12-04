@@ -5,7 +5,7 @@ public class RoundManager : MonoBehaviour {
     private List<IRoundable> _roundables;
 
     public int RoundCount = 15;
-    [ReadOnly]
+    // [ReadOnly]
     private int _currentRound = 0;
     public int CurrentRound { get => _currentRound; }
 
