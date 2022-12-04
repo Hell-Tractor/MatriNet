@@ -6,9 +6,9 @@ using UnityEngine;
 public class AreaSelector : IMultiSelector {
     private float _DistofPtoL(Vector2 lineStart, Vector2 lineEnd, Vector2 point) {
         if (lineStart.x == lineEnd.x) {
-            return Mathf.Abs(point.y-lineStart.y);
+            return Mathf.Abs(point.y - lineStart.y);
         }else if (lineStart.y == lineEnd.y) {
-            return Mathf.Abs(point.x-lineStart.x);
+            return Mathf.Abs(point.x - lineStart.x);
         }else {
             float A = (lineEnd.y - lineStart.y);
             float B = (lineStart.x - lineEnd.x);
@@ -48,11 +48,11 @@ public class AreaSelector : IMultiSelector {
     public List<Vector2> Select(ChessSet set) {
         List<Vector2> allpoint = new List<Vector2> {};
         float UpperY = set.chesses[0].position.y, DownY = set.chesses[0].position.y, LeftX = set.chesses[0].position.x, RightX = set.chesses[0].position.x;
-        for (int i = 0; i <= set.chesses.Count(); i++) { 
-            if (set.chesses[i].position.x < LeftX) { LeftX=set.chesses[i].position.x;}
-            if (set.chesses[i].position.x > RightX) { RightX=set.chesses[i].position.x;}
-            if (set.chesses[i].position.y > UpperY) { UpperY=set.chesses[i].position.y;}
-            if (set.chesses[i].position.y < DownY) { DownY=set.chesses[i].position.y;}
+        for (int i = 0; i < set.chesses.Count(); i++) { 
+            if (set.chesses[i].position.x < LeftX) { LeftX = set.chesses[i].position.x;}
+            if (set.chesses[i].position.x > RightX) { RightX = set.chesses[i].position.x;}
+            if (set.chesses[i].position.y > UpperY) { UpperY = set.chesses[i].position.y;}
+            if (set.chesses[i].position.y < DownY) { DownY = set.chesses[i].position.y;}
 
         }
         for (int axisX = (int) (LeftX + 1E-7); axisX <= (int) (RightX + 1E-7); axisX++) {
