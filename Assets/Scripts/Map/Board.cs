@@ -93,4 +93,11 @@ public class Board : MonoBehaviour {
             return null;
         return this.chessSets[this.chessSets.Count - 1];
     }
+
+    public List<IRoundable> GetRoundables() {
+        List<IRoundable> result = new List<IRoundable>();
+        result.AddRange(this.chesses);
+        result.AddRange(this.chessSets);
+        return result;
+    }
 }
