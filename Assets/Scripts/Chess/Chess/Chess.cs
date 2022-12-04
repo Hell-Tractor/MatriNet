@@ -1,9 +1,7 @@
 using UnityEngine;
 
 public abstract class Chess : MonoBehaviour, IRoundable {
-    [SerializeField, ReadOnly]
-    private Vector2 _position;
-    public Vector2 position { get { return _position; } }
+    public Vector2 position { get { return transform.position; } }
     public bool isSettled { get; private set; }
     public ISingleSelector selector { get; private set; }
     public int Id { get; private set; }
