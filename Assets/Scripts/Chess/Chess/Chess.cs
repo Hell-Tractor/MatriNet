@@ -7,6 +7,7 @@ public abstract class Chess : MonoBehaviour, IRoundable {
     public int Id { get; private set; }
     public ChessType type { get; protected set; }
     private static int _count = 0;
+    private bool isFollowingMouse = false;
 
     public Chess() {
         this.Id = _count++;
@@ -15,8 +16,14 @@ public abstract class Chess : MonoBehaviour, IRoundable {
 
 #region ChessEvents
     public virtual void OnClick(Board board, int mouse) {}
-    public virtual void OnPick(Board board) {}
-    public virtual void OnPlace(Board board) {}
+    public virtual void OnPick(Board board) {
+        isFollowingMouse = true;
+        MouseFollower.Instance.item = gameObject;
+    }
+    public virtual void OnPlace(Board board) {
+        isFollowingMouse = false;
+        MouseFollower.Instance.item = null;
+    }
 #endregion
 #region IRoundable
     public virtual void OnRoundBegin(RoundManager round) {
