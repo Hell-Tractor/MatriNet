@@ -3,20 +3,7 @@ using System.Linq;
 using UnityEngine;
 
 
-public class AreaSelector : IMultiSelector {
-    private float _DistofPtoL(Vector2 lineStart, Vector2 lineEnd, Vector2 point) {
-        if (lineStart.x == lineEnd.x) {
-            return Mathf.Abs(point.y - lineStart.y);
-        }else if (lineStart.y == lineEnd.y) {
-            return Mathf.Abs(point.x - lineStart.x);
-        }else {
-            float A = (lineEnd.y - lineStart.y);
-            float B = (lineStart.x - lineEnd.x);
-            float C = (lineEnd.x - lineStart.x) * lineStart.y - (lineEnd.y - lineStart.y) * lineEnd.x ;
-            return ((A * point.x + B * point.y + C) * (A * point.x + B * point.y + C) / (A * A + B * B));
-        }
-        
-    } 
+public class AreaSelector : IMultiSelector { 
     private bool _IsInPolygon(Vector2 checkPoint, List<Vector2> polygonPoints) {
         bool inside = false;
         int pointCount = polygonPoints.Count;
@@ -25,9 +12,7 @@ public class AreaSelector : IMultiSelector {
         for (int i = 0, j = pointCount - 1; i < pointCount; j = i, i++) {
             p1 = polygonPoints[i];
             p2 = polygonPoints[j];
-            if (_DistofPtoL(p1, p2, checkPoint) < 0.5) {
-                inside = !inside;
-            }
+            
             if (checkPoint.y < p2.y) {
                 if (p1.y <= checkPoint.y) {
                     if ((checkPoint.y - p1.y) * (p2.x - p1.x) > (checkPoint.x - p1.x) * (p2.y - p1.y)) {
@@ -63,7 +48,11 @@ public class AreaSelector : IMultiSelector {
                 }
             }
         }
-        return allpoint;
+
+        LineSelector lineSelector = new LineSelector();
+        List<Vector2> allpoint2 = lineSelector.Select(set);
+        allpoint.AddRange(allpoint2);
+        return allpoint.Distinct().ToList();
     }
 }
 
