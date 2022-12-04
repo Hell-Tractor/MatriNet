@@ -33,7 +33,7 @@ public class LineSelector : IMultiSelector {
                 Vector2 targetPoint = new Vector2(axisX, axisY);
                 for (int i = 0; i < set.chesses.Count() - 1; i++) {
                     if (_DistofPtoL(set.chesses[i].position, set.chesses[i + 1].position, targetPoint) < 0.5) {
-                        if (!allpoint.Find(targetPoint)) {
+                        if (allpoint.Find(point => targetPoint == point) != null) {
                             allpoint.Add(targetPoint);
                         }
                         
@@ -43,21 +43,21 @@ public class LineSelector : IMultiSelector {
         }
         for (int i = 0; i < set.chesses.Count() - 1; i++) {
             if (set.chesses[i].position.x - set.chesses[i + 1].position.x <= 1E-7) {
-                float minnum = int.MinValue(set.chesses[i].position.y, set.chesses[i + 1].position.y);
-                float maxnum = int.MaxValue(set.chesses[i].position.y, set.chesses[i + 1].position.y); 
+                float minnum = Mathf.Min(set.chesses[i].position.y, set.chesses[i + 1].position.y);
+                float maxnum = Mathf.Max(set.chesses[i].position.y, set.chesses[i + 1].position.y); 
                 for (float j = 0; j <= maxnum - minnum + 1E-7; j++) {
                     Vector2 targetPoint=new Vector2(set.chesses[i].position.x, minnum + j);
-                    if (!allpoint.Find(targetPoint)) {
+                    if (allpoint.Find(point => targetPoint == point) != null) {
                         allpoint.Add(targetPoint);
                     }
                 }
                     
             }else if (set.chesses[i].position.y - set.chesses[i + 1].position.y <= 1E-7) {
-                float minnum = int.MinValue(set.chesses[i].position.x, set.chesses[i + 1].position.x);
-                float maxnum = int.MaxValue(set.chesses[i].position.x, set.chesses[i + 1].position.x); 
+                float minnum = Mathf.Min(set.chesses[i].position.x, set.chesses[i + 1].position.x);
+                float maxnum = Mathf.Max(set.chesses[i].position.x, set.chesses[i + 1].position.x); 
                 for (float j = 0; j <= maxnum - minnum + 1E-7; j++) {
                     Vector2 targetPoint=new Vector2(minnum + j, set.chesses[i].position.y);
-                    if (!allpoint.Find(targetPoint)) {
+                    if (allpoint.Find(point => targetPoint == point) != null) {
                         allpoint.Add(targetPoint);
                     }
                 }
