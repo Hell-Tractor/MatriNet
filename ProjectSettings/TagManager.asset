@@ -41,3 +41,18 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: UnderBackground
+    uniqueID: 3163948847
+    locked: 0
+  - name: Background
+    uniqueID: 3029132187
+    locked: 0
+  - name: PlayerChess
+    uniqueID: 3035752775
+    locked: 0
+  - name: Fog
+    uniqueID: 1354359403
+    locked: 0
+  - name: EnemyChess
+    uniqueID: 4134933937
+    locked: 0
