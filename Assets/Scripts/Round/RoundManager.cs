@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class RoundManager : MonoBehaviour {
@@ -27,9 +28,24 @@ public class RoundManager : MonoBehaviour {
         }
         _roundables = Board.Instance.GetRoundables();
         _roundables.ForEach(roundable => roundable.OnRoundBegin(this));
+        List<Lattice> temp = GameObject.FindGameObjectsWithTag("Lattice").Select(x => x.GetComponent<Lattice>()).ToList();
+        EnemyAI NewRoundEnemy = new EnemyAI();
+        NewRoundEnemy.GenerateEasyAttack(_currentRound, Board.Instance.chessSets, temp);
+        foreach (var chess in NewRoundEnemy.EnemyChessSet) {
+            var tmpchess = ChessFactory.Instance.GenerateChess(chess.type);
+            tmpchess.transform.position = chess.position;
+        }
+        
     }
 
     public void EndCurrentRound() {
+        
+        List<IRoundable> mirros = _roundables.Where(r => (r as MirrorChess) != null).ToList();
+        List<IRoundable> enemy = _roundables.Where(r => (r as Chess) != null && (r as Chess).IsEnemy).ToList();
+        mirros.ForEach(roundable => roundable.OnRoundEnd(this));
+        enemy.ForEach(roundable => roundable.OnRoundEnd(this));
         _roundables.ForEach(roundable => roundable.OnRoundEnd(this));
+        AreaSelector EndRoundArea = new AreaSelector();
+        PlayerInfo.Instance.Money += EndRoundArea.Select(Board.Instance.GetCurrentChessSet()).Count;
     }
 }

@@ -701,6 +701,7 @@ GameObject:
   - component: {fileID: 478108579}
   - component: {fileID: 478108580}
   - component: {fileID: 478108581}
+  - component: {fileID: 478108582}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -760,6 +761,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Money: 100
+--- !u!114 &478108582
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 478108577}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20c604a59ec2d42469f76df8422fc76d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RoundCount: 15
 --- !u!1 &500211478
 GameObject:
   m_ObjectHideFlags: 0
@@ -1511,6 +1525,7 @@ MonoBehaviour:
   MirrorChessPrefab: {fileID: 5842162367881578042, guid: 592f69e20cb66d94eb7a48d6ffd16f30, type: 3}
   RockChessPrefab: {fileID: 2239817150752515877, guid: 324760ddfe2b32a42ac93c5851bcdca6, type: 3}
   BombChessPrefab: {fileID: 5109021425585418213, guid: fe74e1bf0ec250c45839326fb1d95300, type: 3}
+  EnemyChipChessPrefab: {fileID: 0}
 --- !u!4 &940560951
 Transform:
   m_ObjectHideFlags: 0
@@ -1682,7 +1697,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1067658120}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 478108582}
+        m_TargetAssemblyTypeName: RoundManager, Assembly-CSharp
+        m_MethodName: EndCurrentRound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1067658120
 MonoBehaviour:
   m_ObjectHideFlags: 0

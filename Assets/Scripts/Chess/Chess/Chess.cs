@@ -8,7 +8,7 @@ public abstract class Chess : MonoBehaviour, IRoundable {
     public ChessType type { get; protected set; }
     private static int _count = 0;
     private bool isFollowingMouse = false;
-
+    public bool IsEnemy = false;
     public Chess() {
         this.Id = _count++;
     }
