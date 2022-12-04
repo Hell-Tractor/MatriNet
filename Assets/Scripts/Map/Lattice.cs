@@ -35,17 +35,19 @@ public class Lattice : MonoBehaviour {
         return this.chess != null;
     }
 
-    public void SetChess(Chess chess) {
-        if (this._hasFog) {
+    public bool SetChess(Chess chess, bool ignoreFog = false) {
+        if (this._hasFog && !ignoreFog) {
             Debug.LogWarning("Lattice has fog, can't set chess.");
-            return;
+            return false;
         }
         if (this.chess != null) {
             Debug.LogError("Lattice already has a chess.");
-            return;
+            return false;
         }
         this.chess = chess;
-        // chess.transform.localPosition = Vector2.zero;
+        chess.transform.parent = this.transform;
+        chess.transform.localPosition = Vector2.zero;
+        this.chess.OnPlace(Board.Instance);
 
         // Generate Lattice nearby
         Board.Instance.GenerateLattice(this.transform.position, this.PreGenerateWidth);
@@ -57,5 +59,13 @@ public class Lattice : MonoBehaviour {
                 lattice.CloseFog();
             }
         }
+        return true;
+    }
+
+    public Chess GetChess() {
+        Chess chess = this.chess;
+        this.chess = null;
+        chess.OnPick(Board.Instance);
+        return chess;
     }
 }

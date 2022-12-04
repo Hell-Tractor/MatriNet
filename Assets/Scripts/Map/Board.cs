@@ -1,3 +1,5 @@
+using System.Runtime.InteropServices.ComTypes;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Board : MonoBehaviour {
@@ -5,6 +7,8 @@ public class Board : MonoBehaviour {
     public Vector2Int LatticeSize;
     public int InitSize;
     public int NonFogSize;
+    public List<Chess> chesses = new List<Chess>();
+    public List<ChessSet> chessSets = new List<ChessSet>();
 
     public static Board Instance { get; private set; } = null;
 
@@ -22,8 +26,27 @@ public class Board : MonoBehaviour {
         if (Input.GetMouseButtonDown(0)) {
             Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Lattice lattice = this.GetLatticeAt(mousePosition);
-            if (lattice != null)
-                lattice.SetChess(null);
+            if (lattice != null) {
+                if (lattice.HasChess()) {
+                    lattice.chess.OnClick(this, 0);
+                } else {
+                    Chess chess = ChessFactory.Instance.GenerateChess(ChessType.Chip);
+                    if (!lattice.SetChess(chess))
+                        Destroy(chess.gameObject);
+                    else
+                        chesses.Add(chess);
+                }
+            }
+        }
+
+        if (Input.GetMouseButtonDown(1)) {
+            Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Lattice lattice = this.GetLatticeAt(mousePosition);
+            if (lattice != null) {
+                if (lattice.HasChess()) {
+                    lattice.chess.OnClick(this, 1);
+                }
+            }
         }
     }
 
@@ -57,5 +80,17 @@ public class Board : MonoBehaviour {
 
     public Lattice GetLatticeAt(Vector2 position) {
         return Physics2D.Raycast(position, Vector2.zero, 1f, LayerMask.GetMask("Lattice")).collider?.GetComponent<Lattice>();
+    }
+
+    public ChessSet CreateNewChessSet() {
+        ChessSet chessSet = new ChessSet();
+        this.chessSets.Add(chessSet);
+        return chessSet;
+    }
+
+    public ChessSet GetCurrentChessSet() {
+        if (this.chessSets.Count == 0)
+            return null;
+        return this.chessSets[this.chessSets.Count - 1];
     }
 }

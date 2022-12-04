@@ -1,5 +1,8 @@
 using System.Collections.Generic;
+using UnityEngine;
 
-public interface IMutiSelector {
-    List<Chess> Select(ChessSet set, List<Chess> allChess);
+public interface IMultiSelector {
+    List<Vector2> Select(ChessSet set);
+    
 }
+
