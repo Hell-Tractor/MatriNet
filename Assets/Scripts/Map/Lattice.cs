@@ -47,6 +47,7 @@ public class Lattice : MonoBehaviour {
         this.chess = chess;
         chess.transform.parent = this.transform;
         chess.transform.localPosition = Vector2.zero;
+        this.chess.OnPlace(Board.Instance);
 
         // Generate Lattice nearby
         Board.Instance.GenerateLattice(this.transform.position, this.PreGenerateWidth);
@@ -59,5 +60,12 @@ public class Lattice : MonoBehaviour {
             }
         }
         return true;
+    }
+
+    public Chess GetChess() {
+        Chess chess = this.chess;
+        this.chess = null;
+        chess.OnPick(Board.Instance);
+        return chess;
     }
 }

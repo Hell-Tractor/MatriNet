@@ -5046,7 +5046,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ChipChessPrefab: {fileID: 5785211321744110922, guid: b62d87880ef5bac4aac9ab82e6e674c2, type: 3}
-  MirrorChessPrefab: {fileID: 0}
+  MirrorChessPrefab: {fileID: 5842162367881578042, guid: 592f69e20cb66d94eb7a48d6ffd16f30, type: 3}
   RockChessPrefab: {fileID: 0}
   BombChessPrefab: {fileID: 0}
 --- !u!4 &940560951
