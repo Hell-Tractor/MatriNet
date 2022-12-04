@@ -1525,7 +1525,7 @@ MonoBehaviour:
   MirrorChessPrefab: {fileID: 5842162367881578042, guid: 592f69e20cb66d94eb7a48d6ffd16f30, type: 3}
   RockChessPrefab: {fileID: 2239817150752515877, guid: 324760ddfe2b32a42ac93c5851bcdca6, type: 3}
   BombChessPrefab: {fileID: 5109021425585418213, guid: fe74e1bf0ec250c45839326fb1d95300, type: 3}
-  EnemyChipChessPrefab: {fileID: 0}
+  EnemyChipChessPrefab: {fileID: 5785211321744110922, guid: 08905dc91f74f804b90ff794a8afbc93, type: 3}
 --- !u!4 &940560951
 Transform:
   m_ObjectHideFlags: 0
