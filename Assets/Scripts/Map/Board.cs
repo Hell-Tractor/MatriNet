@@ -27,13 +27,22 @@ public class Board : MonoBehaviour {
             Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Lattice lattice = this.GetLatticeAt(mousePosition);
             if (lattice != null) {
-                if (lattice.HasChess()) {
+                Debug.Log(lattice.HasChess());
+                if (lattice.HasChess() && MouseFollower.Instance.item == null) {
+                    if (lattice.chess.type == ChessType.Chip) {
+                        RazerManager.Instance.RemoveAllRazer();
+                        this.chessSets.Clear();
+                        this.chesses.ForEach(chess => {
+                            if (chess.type == ChessType.Chip)
+                                (chess as ChipChess).isInChessSet = false;
+                        });
+                    }
                     lattice.chess.OnClick(this, 0);
-                } else {
-                    Chess chess = ChessFactory.Instance.GenerateChess(ChessType.Chip);
-                    if (!lattice.SetChess(chess))
-                        Destroy(chess.gameObject);
-                    else
+                    lattice.chess.OnPick(this);
+                    lattice.GetChess();
+                } else if (!lattice.HasChess() && MouseFollower.Instance.item != null) {
+                    Chess chess = MouseFollower.Instance.item.GetComponent<Chess>();
+                    if (lattice.SetChess(chess))
                         chesses.Add(chess);
                 }
             }

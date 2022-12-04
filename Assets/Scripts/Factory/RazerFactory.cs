@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Linq;
 
 public class RazerFactory : MonoBehaviour {
     public GameObject RazerPrefab;
@@ -17,6 +18,6 @@ public class RazerFactory : MonoBehaviour {
         float length = Vector2.Distance(from, to);
         Vector2 center = (from + to) / 2;
         GameObject razer = Instantiate(RazerPrefab, center, Quaternion.Euler(0, 0, Vector2.SignedAngle(Vector2.right, to - from)));
-        razer.transform.localScale = new Vector3(length, razer.transform.localScale.y, razer.transform.localScale.z);
+        razer.GetComponentsInChildren<SpriteRenderer>().ToList().ForEach(sr => sr.size = new Vector2(length, sr.size.y));
     }
 }
