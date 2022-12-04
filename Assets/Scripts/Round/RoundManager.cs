@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class RoundManager : MonoBehaviour {
     private List<IRoundable> _roundables;
@@ -9,6 +10,9 @@ public class RoundManager : MonoBehaviour {
     // [ReadOnly]
     private int _currentRound = 0;
     public int CurrentRound { get => _currentRound; }
+    public GameObject Shop;
+    public GameObject GameOverUI;
+    public Text RoundText;
 
     public static RoundManager Instance { get; private set; }
 
@@ -25,8 +29,10 @@ public class RoundManager : MonoBehaviour {
         _currentRound++;
         if (_currentRound > RoundCount) {
             Debug.Log("Game Over");
+            GameOverUI.SetActive(true);
             return;
         }
+        RoundText.text = "Round " + _currentRound + " / " + RoundCount;
         _roundables = Board.Instance.GetRoundables();
         _roundables.ForEach(roundable => roundable.OnRoundBegin(this));
         List<Lattice> temp = GameObject.FindGameObjectsWithTag("Lattice").Select(x => x.GetComponent<Lattice>()).ToList();
@@ -36,7 +42,7 @@ public class RoundManager : MonoBehaviour {
             var tmpchess = ChessFactory.Instance.GenerateChess(chess.type);
             tmpchess.transform.position = chess.position;
         }
-        
+        RazerManager.Instance.RemoveAllRazer();
     }
 
     public void EndCurrentRound() {
@@ -49,9 +55,8 @@ public class RoundManager : MonoBehaviour {
         AreaSelector EndRoundArea = new AreaSelector();
         PlayerInfo.Instance.Money += Board.Instance.chessSets.Select(chessset => EndRoundArea.Select(chessset).Count).Sum();
         Debug.Log(PlayerInfo.Instance.Money);
-        RazerManager.Instance.RemoveAllRazer();
         Board.Instance.chesses = Board.Instance.chesses.Where(chess => !chess.IsEnemy).ToList();
         GameObject.FindGameObjectsWithTag("Enemy").ToList().ForEach(x => Destroy(x));
-        StartNextRound();
+        Shop?.SetActive(true);
     }
 }

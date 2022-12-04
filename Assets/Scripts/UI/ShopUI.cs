@@ -71,6 +71,7 @@ public class ShopUI : MonoBehaviour, IPointerClickHandler
     public void CloseShop()
     {
         shopWindow.SetActive(false);
+        RoundManager.Instance.StartNextRound();
     }
 
 }
