@@ -31,15 +31,21 @@ public class RoundManager : MonoBehaviour {
         List<Lattice> temp = GameObject.FindGameObjectsWithTag("Lattice").Select(x => x.GetComponent<Lattice>()).ToList();
         EnemyAI NewRoundEnemy = new EnemyAI();
         NewRoundEnemy.GenerateEasyAttack(_currentRound, Board.Instance.chessSets, temp);
+        foreach (var chess in NewRoundEnemy.EnemyChessSet) {
+            chess = ChessFactory.Instance.GenerateChess(chess.type);
+            chess.transform.position = chess.position;
+        }
+        
     }
 
     public void EndCurrentRound() {
         
-        AreaSelector EndRoundArea = new AreaSelector();
-        
-        PlayerInfo.Instance.Money += EndRoundArea.Select(Board.Instance.GetCurrentChessSet()).Count;
-
+        List<IRoundable> mirros = _roundables.Where(r => (r as MirrorChess) != null).ToList();
+        List<IRoundable> enemy = _roundables.Where(r => (r as Chess) != null && (r as Chess).IsEnemy).ToList();
+        mirros.ForEach(roundable => roundable.OnRoundEnd(this));
+        enemy.ForEach(roundable => roundable.OnRoundEnd(this));
         _roundables.ForEach(roundable => roundable.OnRoundEnd(this));
-
+        AreaSelector EndRoundArea = new AreaSelector();
+        PlayerInfo.Instance.Money += EndRoundArea.Select(Board.Instance.GetCurrentChessSet()).Count;
     }
 }

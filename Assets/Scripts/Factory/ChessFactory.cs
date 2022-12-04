@@ -37,6 +37,9 @@ public class ChessFactory : MonoBehaviour {
                 break;
         }
         GameObject chess = Instantiate(chessPrefab);
+        Chess tmp = chess.GetComponent<Chess>();
+        if (type == ChessType.EnemyChip) 
+            tmp.IsEnemy = true;
         return chess.GetComponent<Chess>();
     }
 }
