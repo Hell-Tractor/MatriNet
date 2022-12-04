@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class DrawCards : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class DrawCards : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler,IPointerClickHandler
 {
     public float distance = 1f;
     public void OnPointerEnter(PointerEventData eventData)
@@ -17,7 +17,27 @@ public class DrawCards : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
         Debug.Log("OnPointerExit");
         this.transform.Translate(new Vector3(0, -distance,0));
     }
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        if(name == "chip")
+        {
+            Debug.Log("chip");
+            ChessFactory.Instance.GenerateChess(ChessType.Chip);
+        }
+        else if(name == "mirror")
+        {
+            Debug.Log("mirror");
+            ChessFactory.Instance.GenerateChess(ChessType.Mirror);
+        }
+        else if(name == "bomb")
+        {
+            Debug.Log("bomb");
+            ChessFactory.Instance.GenerateChess(ChessType.Rock);
+        }
 
+
+
+    }
 }
 
 
