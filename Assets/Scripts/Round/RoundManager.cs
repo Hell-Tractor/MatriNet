@@ -32,8 +32,8 @@ public class RoundManager : MonoBehaviour {
         EnemyAI NewRoundEnemy = new EnemyAI();
         NewRoundEnemy.GenerateEasyAttack(_currentRound, Board.Instance.chessSets, temp);
         foreach (var chess in NewRoundEnemy.EnemyChessSet) {
-            chess = ChessFactory.Instance.GenerateChess(chess.type);
-            chess.transform.position = chess.position;
+            var tmpchess = ChessFactory.Instance.GenerateChess(chess.type);
+            tmpchess.transform.position = chess.position;
         }
         
     }
