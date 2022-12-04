@@ -16,6 +16,13 @@ public class ChipChess : Chess {
             if (currentSet.chesses.Count > 0 && currentSet.chesses[0].Id == this.Id) {
                 if (currentSet.chesses.Count > 1) {
                     currentSet.chesses.Add(this);
+                    IMultiSelector areaSelector = new AreaSelector();
+                    areaSelector.Select(currentSet).ForEach(x => {
+                        Lattice lattice = board.GetLatticeAt(x);
+                        if (lattice != null) {
+                            lattice.GetComponent<SpriteRenderer>().color = lattice.HighLightColor;
+                        }
+                    });
                     board.CreateNewChessSet();
                 }
             } else {
