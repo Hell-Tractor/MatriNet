@@ -22,17 +22,18 @@ public class DrawCards : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
         if(name == "chip")
         {
             Debug.Log("chip");
-            ChessFactory.Instance.GenerateChess(ChessType.Chip);
+            ChessFactory.Instance.GenerateChess(ChessType.Chip).OnPick(Board.Instance);
+
         }
         else if(name == "mirror")
         {
             Debug.Log("mirror");
-            ChessFactory.Instance.GenerateChess(ChessType.Mirror);
+            ChessFactory.Instance.GenerateChess(ChessType.Mirror).OnPick(Board.Instance);
         }
         else if(name == "bomb")
         {
             Debug.Log("bomb");
-            ChessFactory.Instance.GenerateChess(ChessType.Rock);
+            ChessFactory.Instance.GenerateChess(ChessType.Rock).OnPick(Board.Instance);
         }
 
 
